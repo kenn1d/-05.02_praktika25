@@ -4,6 +4,7 @@ using praktika22.Data.Interfaces;
 using praktika22.Data.Models;
 using praktika22.Data.ViewModell;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 
 namespace praktika22.Controllers
 {
@@ -37,6 +38,18 @@ namespace praktika22.Controllers
             if(idItem != -1)
             {
                 Startup.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+            }
+            return Json(Startup.BasketItem);
+        }
+
+        public ActionResult BasketCount(int idItem = -1, int count = -1)
+        {
+            if (idItem != -1)
+            {
+                if (count == 0)
+                    Startup.BasketItem.Remove(Startup.BasketItem.Find(x => x.Id == idItem));
+                else
+                    Startup.BasketItem.Find(x => x.Id == idItem).Count = count;
             }
             return Json(Startup.BasketItem);
         }
