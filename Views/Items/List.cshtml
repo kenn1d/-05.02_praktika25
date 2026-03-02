@@ -26,7 +26,7 @@
 			Выбрать ...
 		</option>
 		@{
-			foreach (var Category in Model.Categorys){
+			foreach (var Category in Model.Categorys) {
 				if (Category.Id == categoryType) {
 					<option selected="selected" value="@Category.Id">@Category.Name</option>
 				}
@@ -72,7 +72,7 @@
 		// показываем элемент с классом count
 		$(this).parent().children(".count").show();
 		// скрываем кнопку
-		(this).hide();
+		$(this).hide();
 		// вызываем AJAX
 		$.ajax({
 			// контроллер выполнения и метод вызываемый в нём
@@ -97,6 +97,8 @@
 		// получаем кол-во
 		var CountQueuingStrategy = $(this).parent().children(".text").text();
 		// уменьшаем кол-во
+		var idItem = ClipboardItem;
+		var count = CountQueuingStrategy;
 		count--;
 		// если кол-во 0
 		if (count == 0){
@@ -124,6 +126,8 @@
 	$(".count").children(".max").click(function() {
 		var ClipboardItem = $(this).parent().parent().children(".button").attr("id");
 		var CountQueuingStrategy = $(this).parent().children(".text").text();
+		var idItem = ClipboardItem;
+		var count = CountQueuingStrategy;
 		count++;
 		$(this).parent().children(".text").text(count);
 
@@ -143,7 +147,7 @@
 	}
 
 	function AjaxError() {
-		colsole.log("Ошибка выполнения ajax");
+		console.log("Ошибка выполнения ajax");
 	}
 
 	function SelectCategory(sender) {
