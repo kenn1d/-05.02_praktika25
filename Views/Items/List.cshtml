@@ -39,6 +39,36 @@
 	<input type='button' value='По убыванию' onclick="downPrice()"/>
 	<input type='button' value='По возрастанию' onclick="upPrice()"/>
 	<script>
+		$(".item").children(".basket").children(".button").click(function() {
+			// показываем элемент с классом count
+			$(this).parent().children(".count").show();
+			// скрываем кнопку
+			(this).hide();
+			// вызываем AJAX
+			$.ajax({
+				// контроллер выполнения и метод вызываемый в нём
+				url: '@Url.Action("Basket", "Items")',
+				// тд которые мы отправляем
+				contentType: "application/json; charset=utf-8",
+				// передаём id предмета
+				data: { idItem: $(this).attr('id') },
+				// тд, ожидаемых от сервера
+				dataType: "json",
+				// функция успешного выполнения
+				success: SeccessBasket,
+				// не успешного
+				error: AjaxError
+			});
+		});
+
+		function SeccessBasket(data) {
+			console.log(data;
+		}
+
+		function AjaxError() {
+			colsole.log("Ошибка выполнения ajax");
+		}
+
 		function SelectCategory(sender) {
 			window.location = "/Items/List?id=" + sender.value;
 		}
