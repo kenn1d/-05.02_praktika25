@@ -38,7 +38,7 @@
 	</select>
 	<input type='button' value='По убыванию' onclick="downPrice()"/>
 	<input type='button' value='По возрастанию' onclick="upPrice()"/>
-	
+	<input type="button" class="basketCount" value="В корзине: 0" />
 </div>
 <h2>Все предметы</h2>
 @{
@@ -67,12 +67,17 @@
 }
 
 <script>
+	
+	let counter = 0;
+
 	// при нажатии на кнопку, находящуюся в корзине и находящуюся в предмете
 	$(".item").children(".basket").children(".button").click(function() {
 		// показываем элемент с классом count
 		$(this).parent().children(".count").show();
 		// скрываем кнопку
 		$(this).hide();
+		counter++;
+		$(".basketCount").val(`В корзине: ${counter}`);
 		// вызываем AJAX
 		$.ajax({
 			// контроллер выполнения и метод вызываемый в нём
@@ -100,6 +105,9 @@
 		var idItem = ClipboardItem;
 		var count = CountQueuingStrategy;
 		count--;
+		// Кнопка счётчика корзины
+		counter--;
+		$(".basketCount").val(`В корзине: ${counter}`);
 		// если кол-во 0
 		if (count == 0){
 			// показываем кнопку
@@ -129,6 +137,8 @@
 		var idItem = ClipboardItem;
 		var count = CountQueuingStrategy;
 		count++;
+		counter++;
+		$(".basketCount").val(`В корзине: ${counter}`);
 		$(this).parent().children(".text").text(count);
 
 		// вызываем AJAX
