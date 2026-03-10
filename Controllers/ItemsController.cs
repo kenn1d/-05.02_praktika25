@@ -55,6 +55,12 @@ namespace praktika22.Controllers
         }
 
         [HttpGet]
+        public ViewResult BasketItems()
+        {
+            return View(Startup.BasketItem);
+        }
+
+        [HttpGet]
         public ViewResult Add()
         {
             IEnumerable<Data.Models.Categorys> Categorys = IAllCategorys.AllCategorys;
